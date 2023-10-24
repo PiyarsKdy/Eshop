@@ -11,6 +11,7 @@ import { useState } from "react";
 import { addToCart } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {toast} from "react-toastify";
+import Meta from "../components/meta";
 
 const ProductScreen = () => {
     // const [product, setProducts] = useState([]);
@@ -65,6 +66,7 @@ const ProductScreen = () => {
             <Message variant='danger'>{error?.data?.message || error.error}</Message>
         ) : (
             <>
+            <Meta title={product.name} />
             <Row>
             <Col md={5}>
                 <Image src={product.image} alt={product.name} fluid/>

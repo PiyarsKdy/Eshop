@@ -1,11 +1,11 @@
 import {Link, useParams} from 'react-router-dom';
-import {Button, Row, Col, ListGroup, Image, Card, Form} from 'react-bootstrap';
+import {Button, Row, Col, ListGroup, Image, Card} from 'react-bootstrap';
 import Message from '../components/message';
 import Loader from '../components/loader';
 import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useDeliverOrderMutation } from '../slices/ordersApiSlice';
 import {PayPalButtons, usePayPalScriptReducer} from '@paypal/react-paypal-js';
 import {toast} from 'react-toastify';
-import { UseSelector, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
  
 
