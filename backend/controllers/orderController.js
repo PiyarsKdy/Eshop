@@ -109,11 +109,29 @@ const getOrders = asyncHandler(async (req, res) => {
   res.status(200).json(orders);
 });
 
+
+// @desc Cancel a order
+// @route DELETE /api/orders/:id
+// @access Private/Admin
+const cancelOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if(order){
+    await Order.deleteOne({_id: order._id})
+    res.status(200).json({message: 'Order deleted'});
+  } else {
+    res.status(404);
+    throw new Error('Resource not found');
+  }
+
+});
+
 export {
     addOrderItems,
     getMyOrders,
     getOrderById,
     updateOrderToPaid,
     updateOrderToDelivered,
-    getOrders
+    getOrders,
+    cancelOrder
 };

@@ -1,19 +1,35 @@
 import { LinkContainer } from "react-router-bootstrap"
 import { Table, Button } from "react-bootstrap"
-import { FaTimes } from "react-icons/fa"
+import { FaTimes, FaTrash } from "react-icons/fa"
 import Message from "../../components/message"
 import Loader from "../../components/loader"
-import { useGetOrdersQuery } from "../../slices/ordersApiSlice"
+import { useCancelOrderMutation, useGetOrdersQuery } from "../../slices/ordersApiSlice"
+import {toast} from "react-toastify";
 
 
 const OrderListScreen = () => {
-  const {data: orders, isLoading, error} = useGetOrdersQuery();
-  console.log(orders);
+  const {data: orders, isLoading, error, refetch} = useGetOrdersQuery();
+  const [cancelOrder, {isLoading: loadingDelete}] = useCancelOrderMutation();
+
+  const deleteHandler = async (id) => {
+    if (window.confirm("Are you sure you want to delete")) {
+      try {
+        await cancelOrder(id);
+        refetch();
+        toast.success('Order deleted');
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  }
+  
+
   return (
     <>
     <h1>Orders</h1>
+    {loadingDelete && <Loader/>}
     {isLoading ? <Loader/> : error ? (<Message variant='danger'>{error}</Message>) : (
-      <Table stripped hover responsive className="table-sm">
+      <Table striped hover responsive className="table-sm">
         <thead>
           <tr>
             <th>ID</th>
@@ -52,6 +68,9 @@ const OrderListScreen = () => {
                             Details
                         </Button>
                     </LinkContainer>
+                    <Button variant="danger" className="btn-sm mx-2" onClick={() => deleteHandler(order._id)}>
+                      <FaTrash style = {{color: 'white'}}/>
+                    </Button>
                 </td>
               </tr>
           ))}
