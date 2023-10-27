@@ -31,7 +31,7 @@ const UserListScreen = () => {
     <h1>Users</h1>
     {loadingDelete && <Loader />}
     {isLoading ? <Loader/> : error ? (<Message variant='danger'>{error}</Message>) : (
-      <Table stripped hover responsive className="table-sm">
+      <Table striped hover responsive className="table-sm">
         <thead>
           <tr>
             <th>ID</th>
