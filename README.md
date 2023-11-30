@@ -6,7 +6,7 @@ eCommerce platform built with the MERN stack & Redux.
 
 
 
-![App Screenshot](frontend\public\images\screens.jpg?raw=true "Optional Title")
+![App Screenshot](frontend/public/images/screens.jpg?raw=true)
 
 It is full-fledge eCommerce project packed with numerous features.  See it in action at https://eshop-gu5v.onrender.com/
 
